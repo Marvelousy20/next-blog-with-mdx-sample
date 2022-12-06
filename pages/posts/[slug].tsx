@@ -2,6 +2,7 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import { getBlogContentById, getBlogsId } from "../../lib/posts";
 import { getMDXComponent } from "mdx-bundler/client";
 import { useMemo } from "react";
+import Text from "../../components/Text";
 
 interface FrontMatter {
   title: string;
@@ -14,6 +15,8 @@ interface Post {
   code: string;
   frontmatter: FrontMatter;
 }
+
+const components = { Text };
 
 export default function Post({ slug, code, frontmatter }: Post) {
   const { title, description, date } = frontmatter;
@@ -29,7 +32,7 @@ export default function Post({ slug, code, frontmatter }: Post) {
       </div>
 
       <section>
-        <Component />
+        <Component components={components} />
       </section>
     </div>
   );
